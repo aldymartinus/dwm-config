@@ -2,9 +2,12 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 7;       /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpad            = 6;       /* vertical padding of bar */
+static const int sidepad            = 6;       /* horizontal padding of bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -19,7 +22,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "一", "二", "三", "四", "五", "六", "七", "八", "九" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -59,6 +62,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *printscreencmd[] = { "scrot", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -95,13 +99,16 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+
 	{ MODKEY, XK_F5, spawn, SHCMD("light -U  5") }, /* Decrease brightness */
         { MODKEY, XK_F6, spawn, SHCMD("light -A  5") }, /* Increase brightness */
-        { MODKEY, XK_F7, spawn, SHCMD("light -S  0") }, /* Increase brightness */
-        
-	{ MODKEY, XK_F10, spawn, SHCMD("amixer -q sset Master 0") }, /* Increase brightness */
-        { MODKEY, XK_F11, spawn, SHCMD("amixer -q sset Master 5%-") }, /* Increase brightness */
+        { MODKEY, XK_F7, spawn, SHCMD("light -S  0") }, /* Nullify brightness */
+
+	{ MODKEY, XK_F10, spawn, SHCMD("amixer -q sset Master 0") }, /* Nullify brightness */
+        { MODKEY, XK_F11, spawn, SHCMD("amixer -q sset Master 5%-") }, /* Decrease brightness */
         { MODKEY, XK_F12, spawn, SHCMD("amixer -q sset Master 5%+") }, /* Increase brightness */
+
+	{ 0, XK_Print, spawn, {.v = printscreencmd } }, // screenshoot
 
 };
 
@@ -121,4 +128,5 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
+
 
