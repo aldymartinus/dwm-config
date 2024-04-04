@@ -74,8 +74,8 @@ static const struct arg args[] = {
         /* function format          argument */
        // { cpu_perc,             "CPU:  %s%% ",      NULL },
        // { ram_perc,             "RAM: %s%% ",      NULL },
-        { run_command,          " [亮度 | %s%%] ",      "light" },
-        { battery_perc,         "[电池 | %s%%] ",       "BAT0" },
-	{ run_command, "[音量 | %s] ", "amixer sget Master | tail -1 | awk '{print $5 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
-	{ datetime,             "%s",         "[%a, %d %B %Y | %R] " }, /* Date time with this format: Day name YYYY-MM-DD 18:00:00 */
+        { run_command,          " 󰃞  %s%% ",      "light" },
+        { battery_perc,         "   %s%% ",       "BAT0" },
+	{ run_command, "   %s ", "amixer sget Master | tail -1 | awk '{print $5 }' | sed 's@\\(\\[\\|\\]\\)@@g'" },
+	{ datetime,             "%s",         " %a, %d %B %Y | %R " }, /* Date time with this format: Day name YYYY-MM-DD 18:00:00 */
 };
